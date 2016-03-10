@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">CustomArrayAdapter</string>
+
+    <string-array name="phone_numbers">
+        <item>1234560000</item>
+        <item>1234560001</item>
+        <item>1234560002</item>
+        <item>1234560003</item>
+        <item>1234560004</item>
+        <item>1234560005</item>
+        <item>1234560006</item>
+        <item>1234560007</item>
+        <item>1234560008</item>
+        <item>1234560009</item>
+        <item>1234560010</item>
+    </string-array>
+
+</resources>
