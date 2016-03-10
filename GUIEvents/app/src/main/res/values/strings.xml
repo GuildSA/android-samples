@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">GUIEvents</string>
+    <string name="hello">Hello World, GUIEventsActivity!</string>
+</resources>
