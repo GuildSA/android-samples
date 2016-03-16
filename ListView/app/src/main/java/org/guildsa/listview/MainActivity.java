@@ -15,13 +15,15 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+        
         setContentView(R.layout.activity_main);
 
         // Find the ListView in our layout.
         listView = (ListView) findViewById( R.id.listView );
 
-        // Create and populate a List of planet names.
+        // Create and populate a List of test data.
         String[] myData = new String[] {
                 "Some data 1",
                 "Some data 2",
@@ -42,8 +44,11 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<String> dataList = new ArrayList<>();
         dataList.addAll( Arrays.asList(myData) );
 
-        // Create ArrayAdapter using list of strings.
-        listAdapter = new ArrayAdapter<>(this, R.layout.simple_row, dataList);
+        // Create an ArrayAdapter using our list of strings.
+        // The second arg "android.R.layout.simple_list_item_1" is the resource id of the default
+        // layout provided by the Android SDK. Useful for a quick demo or test of a ListView but
+        // not really used very often in real code.
+        listAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, dataList);
 
         listAdapter.add( "Some data 16" );
         listAdapter.add( "Some data 17" );
@@ -51,7 +56,8 @@ public class MainActivity extends AppCompatActivity {
         listAdapter.add( "Some data 19" );
         listAdapter.add( "Some data 20" );
 
-        // Set the ArrayAdapter as the ListView's adapter.
+        // Set our listAdapter as the ListView's adapter. This is how it knows where to get the
+        // data for the ListView's rows.
         listView.setAdapter( listAdapter );
     }
 }
