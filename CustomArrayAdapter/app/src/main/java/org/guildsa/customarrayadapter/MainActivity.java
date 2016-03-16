@@ -20,19 +20,22 @@ public class MainActivity extends AppCompatActivity {
 
         listView = (ListView) findViewById( R.id.listView );
 
+        // Get our test phone numbers which are stored in the res/values/strings.xml file.
         String[] phoneNumbers = getResources().getStringArray( R.array.phone_numbers );
 
+        // Create an instance of our custom array adaptor to fill our ListView.
         MyCustomArrayAdapter customArrayAdaptor = new MyCustomArrayAdapter( this, phoneNumbers );
 
-        // Set the ArrayAdapter as the ListView's adapter.
+        // Set our custom array adaptor as the ListView's adapter.
         listView.setAdapter( customArrayAdaptor );
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                // When clicked, show a toast with the TextView text.
-                Toast.makeText(getApplicationContext(), "Calling: " + ((TextView) view).getText(), Toast.LENGTH_SHORT).show();
+                // When clicked, show a toast using the TextView text in our row's layout.
+                TextView textView = (TextView) view.findViewById(R.id.label);
+                Toast.makeText(getApplicationContext(), "Calling: " + textView.getText(), Toast.LENGTH_SHORT).show();
             }
         });
     }
