@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">HttpWithAsyncTask</string>
+    <string name="button_text">Use HTTP to Get the Data</string>
+</resources>
