@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
 
     Button button;
     TextView outputText;
-    //GetHTTPTask getHttpTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
