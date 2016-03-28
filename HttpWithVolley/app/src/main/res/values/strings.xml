@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Http With Volley</string>
+    <string name="button_text">Use Volley to Get the Data</string>
 </resources>
