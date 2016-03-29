@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">SharedPreferences</string>
+    <string name="read_shared_prefs">Read From Shared Preferences</string>
+    <string name="write_shared_prefs">Write To Shared Preferences</string>
+    <string name="read_tinydb">Read From TinyDB</string>
+    <string name="write_tinydb">Write To TinyDB</string>
+</resources>
