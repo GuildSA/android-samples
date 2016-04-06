@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:name="org.guildsa.fragments.TextEditFragment"
-        android:id="@+id/textEditragment"
+        android:id="@+id/textEditFragment"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         tools:layout="@layout/text_edit_fragment"/>
@@ -24,8 +24,9 @@
         android:layout_height="wrap_content"
         android:name="org.guildsa.fragments.TextFragment"
         android:id="@+id/textFragment"
-        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        tools:layout="@layout/text_fragment"/>
+        tools:layout="@layout/text_fragment"
+        android:layout_below="@+id/textEditFragment"
+        android:layout_marginTop="50dp"/>
 
 </RelativeLayout>

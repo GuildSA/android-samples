@@ -15,10 +15,10 @@ public class TextEditFragment extends Fragment implements SeekBar.OnSeekBarChang
     private static int seekProgess = 20;
     private static EditText editText;
 
-    TextEditListener activityCallback;
+    TextEditListener parentActivity;
 
     public interface TextEditListener {
-        public void onTextEditButtonClick(int fontsize, String text);
+        public void onTextEditButtonClick(int fontSize, String text);
     }
 
     @Override
@@ -26,9 +26,12 @@ public class TextEditFragment extends Fragment implements SeekBar.OnSeekBarChang
 
         super.onAttach(activity);
 
+        // If our fragment is attached to an Activity, cache a reference to the Activity that is
+        // using our TextEditFragment and make sure that it implements the TextEditListener
+        // interface. If it doesn't implement TextEditListener, we have a problem!
         try {
-            activityCallback = (TextEditListener) activity;
-        } catch (ClassCastException e) {
+            parentActivity = (TextEditListener) activity;
+        } catch(ClassCastException e) {
             throw new ClassCastException(activity.toString() + " must implement ToolbarListener");
         }
     }
@@ -58,7 +61,9 @@ public class TextEditFragment extends Fragment implements SeekBar.OnSeekBarChang
 
     public void buttonClicked(View view) {
 
-        activityCallback.onTextEditButtonClick(seekProgess, editText.getText().toString());
+        // When the button on our fragment is clicked, tell the Activity that is using us
+        // that the button was clicked and pass the required info.
+        parentActivity.onTextEditButtonClick(seekProgess, editText.getText().toString());
     }
 
     @Override
