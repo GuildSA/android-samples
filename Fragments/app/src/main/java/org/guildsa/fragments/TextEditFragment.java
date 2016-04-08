@@ -12,10 +12,9 @@ import android.widget.SeekBar;
 
 public class TextEditFragment extends Fragment implements SeekBar.OnSeekBarChangeListener {
 
-    private static int seekProgess = 20;
-    private static EditText editText;
-
-    TextEditListener parentActivity;
+    private int seekProgess = 20;
+    private EditText editText;
+    private TextEditListener parentActivity;
 
     public interface TextEditListener {
         public void onTextEditButtonClick(int fontSize, String text);
@@ -32,7 +31,7 @@ public class TextEditFragment extends Fragment implements SeekBar.OnSeekBarChang
         try {
             parentActivity = (TextEditListener) activity;
         } catch(ClassCastException e) {
-            throw new ClassCastException(activity.toString() + " must implement ToolbarListener");
+            throw new ClassCastException(activity.toString() + " must implement TextEditListener");
         }
     }
 

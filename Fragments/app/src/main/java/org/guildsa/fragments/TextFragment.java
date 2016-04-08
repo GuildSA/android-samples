@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 public class TextFragment extends Fragment {
 
-    private static TextView textView;
+    private TextView textView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
