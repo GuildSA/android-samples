@@ -50,7 +50,7 @@ public class MainActivityTest extends ActivityUnitTestCase<MainActivity> {
     }
 
     @SmallTest
-    public void mainActivity_textView_isCorrect() {
+    public void test_mainActivity_textView_isCorrect() throws Exception {
 
         // Get the actual text out of textView.
         String actual = textView.getText().toString();
