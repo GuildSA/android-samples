@@ -11,6 +11,7 @@ import com.backendless.BackendlessUser;
 import com.backendless.async.callback.AsyncCallback;
 import com.backendless.async.callback.BackendlessCallback;
 import com.backendless.exceptions.BackendlessFault;
+import com.backendless.persistence.local.UserTokenStorageFactory;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,10 +37,13 @@ public class MainActivity extends AppCompatActivity {
         Backendless.initApp(this, APP_ID, SECRET_KEY, APP_VERSION);
     }
 
-    public void onCreateUserBtn(View v) {
+    public void onRegisterUserBtn(View v) {
 
-        Log.d(TAG, "onCreateUserBtn() called!");
+        Log.d(TAG, "onRegisterUserBtn() called!");
 
+        // In a real app, this where we would send the user to a register screen to collect their
+        // user name and password for registering a new user. For testing purposes, we will simply
+        // register a test user using a hard coded user name and password.
         BackendlessUser user = new BackendlessUser();
         user.setEmail(USER_NAME);
         user.setPassword(PASSWORD);
@@ -64,18 +68,39 @@ public class MainActivity extends AppCompatActivity {
 
         Log.d(TAG, "onLoginUserBtn() called!");
 
-        Backendless.UserService.login(USER_NAME, PASSWORD, new AsyncCallback<BackendlessUser>() {
+        // First, check if the user is already logged in. If they are, we don't need to
+        // ask them to login again.
+        String userToken = UserTokenStorageFactory.instance().getStorage().get();
 
-            public void handleResponse(BackendlessUser user) {
+        if(userToken != null && !userToken.equals("")) {
 
-                Log.d(TAG, "User logged in: " + user.getUserId());
-            }
+            // We found a cached user token so we know for sure the user is already logged!
+            Log.d(TAG, "User is already logged with token: " + userToken.toString());
 
-            public void handleFault(BackendlessFault fault) {
+        } else {
 
-                Log.d(TAG, "User failed to login: " + fault.toString());
-            }
-        });
+            // If we were unable to find a cached user token, the user is not logged and they'll
+            // need to login. In a real app, this where we would send the user to a login screen to
+            // collect their user name and password for the login attempt. For testing purposes,
+            // we will simply login a test user using a hard coded user name and password.
+
+            // Please note how we are passing 'true' for the last argument 'stayLoggedIn'.
+            // This asks that the user should stay logged in by storing or caching the user's login
+            // information so future logins can be skipped next time the user launches the app.
+            Backendless.UserService.login(USER_NAME, PASSWORD, new AsyncCallback<BackendlessUser>() {
+
+                public void handleResponse(BackendlessUser user) {
+
+                    Log.d(TAG, "User logged in: " + user.getUserId());
+                }
+
+                public void handleFault(BackendlessFault fault) {
+
+                    Log.d(TAG, "User failed to login: " + fault.toString());
+                }
+            }, true);
+
+        }
     }
 
     public void onCreateCommentBtn(View v) {
