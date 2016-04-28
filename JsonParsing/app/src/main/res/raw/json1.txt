@@ -1,4 +1,1 @@
-{
-    "name": "The WarL0rd",
-    "maps": [ 12, 23, 55 ]
-}
+[ "Cloe", "Bob", "Jennifer", "Robert" ]

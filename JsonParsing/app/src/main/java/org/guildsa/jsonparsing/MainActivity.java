@@ -24,19 +24,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        try {
-
-            parseJsonTest1();
-            parseJsonTest2();
-
-        } catch(JSONException e) {
-            e.printStackTrace();
-        } catch(IOException e) {
-            e.printStackTrace();
-        }
+        parseJsonTest1();
+        parseJsonTest2();
+        parseJsonTest3();
     }
 
-    public String readJSONFromRes(@RawRes int id) throws JSONException {
+    public String readFileFromRes(@RawRes int id) {
 
         StringBuilder builder = new StringBuilder();
 
@@ -52,109 +45,158 @@ public class MainActivity extends AppCompatActivity {
             }
 
         } catch(IOException e1) {
+
+            // Something went wrong while attempting to read the file's data.
+            // In a real app, you would need to take action here and handle it!
             e1.printStackTrace();
         }
 
         return builder.toString();
     }
 
-    public void parseJsonTest1() throws JSONException, IOException {
+    public void parseJsonTest1() {
 
         // Example 1:
         //
         // Located in: JsonParsing/app/src/main/res/raw/json1.txt
         //
-        //{
-        //    "name": "The WarL0rd",
-        //    "maps": [ 12, 23, 55 ]
-        //}
+        // [ "Cloe", "Bob", "Jennifer", "Robert" ]
 
-        // Get our JSON data our of a file in the res/raw folder and into a String.
-        // In a real app, your JSON data would probably come from a web service or URL.
-        String jsonStr1 = readJSONFromRes(R.raw.json1);
+        try {
 
-        JSONObject rootJsonObject1 = new JSONObject(jsonStr1);
+            // Get our JSON data our of a file in the res/raw folder and into a String.
+            // In a real app, your JSON data would probably come from a web service or URL.
+            String jsonStr = readFileFromRes(R.raw.json1);
 
-        String name = rootJsonObject1.getString("name");
+            JSONArray rootJsonArray = new JSONArray(jsonStr);
 
-        Log.i(TAG, "name = " + name);
+            for(int i = 0; i < rootJsonArray.length(); ++i) {
 
-        JSONArray maps = rootJsonObject1.getJSONArray("maps");
+                String playerName = rootJsonArray.getString(i);
+                Log.i(TAG, "playerName = " + String.valueOf(playerName));
+            }
 
-        for(int i = 0; i < maps.length(); ++i) {
+        } catch(JSONException e) {
 
-            int mapId = maps.getInt(i);
-            Log.i(TAG, "value = " + String.valueOf(mapId));
+            // Something went wrong while attempting to parse the JSON.
+            // In a real app, you would need to take action here and handle it!
+            e.printStackTrace();
         }
     }
 
-    public void parseJsonTest2() throws JSONException, IOException {
+    public void parseJsonTest2() {
 
         // Example 2:
         //
         // Located in: JsonParsing/app/src/main/res/raw/json2.txt
         //
-        //{
-        //    "weapons": {
-        //        "swords": [
-        //            {
-        //                "name": "Short Sword",
-        //                "damage": 25
-        //            },
-        //            {
-        //                "name": "Broad Sword",
-        //                "damage": 100
-        //            },
-        //            {
-        //                "name": "Skull Cleaver",
-        //                "damage": 150
-        //            }
-        //        ],
-        //        "spears": [
-        //            {
-        //                "name": "Wooden Spear",
-        //                "damage": 15
-        //            },
-        //            {
-        //                "name": "Iron Spear",
-        //                "damage": 20
-        //            }
-        //        ]
-        //    }
-        //}
+        // {
+        //     "name": "The WarL0rd",
+        //     "maps": [ 12, 23, 55 ]
+        // }
 
-        // Get our JSON data our of a file in the res/raw folder and into a String.
-        // In a real app, your JSON data would probably come from a web service or URL.
-        String jsonStr2 = readJSONFromRes(R.raw.json2);
+        try {
 
-        JSONObject rootJsonObject2 = new JSONObject(jsonStr2);
+            // Get our JSON data our of a file in the res/raw folder and into a String.
+            // In a real app, your JSON data would probably come from a web service or URL.
+            String jsonStr = readFileFromRes(R.raw.json2);
 
-        JSONObject weapons = rootJsonObject2.getJSONObject("weapons");
+            JSONObject rootJsonObject = new JSONObject(jsonStr);
 
-        JSONArray swords = weapons.getJSONArray("swords");
+            String name = rootJsonObject.getString("name");
 
-        for(int i = 0; i < swords.length(); ++i) {
-
-            JSONObject sword = swords.getJSONObject(i);
-
-            int damage = sword.getInt("damage");
-            String name = sword.getString("name");
-
-            Log.i(TAG, "damage = " + String.valueOf(damage));
             Log.i(TAG, "name = " + name);
+
+            JSONArray maps = rootJsonObject.getJSONArray("maps");
+
+            for(int i = 0; i < maps.length(); ++i) {
+
+                int mapId = maps.getInt(i);
+                Log.i(TAG, "map = " + String.valueOf(mapId));
+            }
+
+        } catch(JSONException e) {
+
+            // Something went wrong while attempting to parse the JSON.
+            // In a real app, you would need to take action here and handle it!
+            e.printStackTrace();
         }
+    }
 
-        JSONArray spears = weapons.getJSONArray("spears");
+    public void parseJsonTest3() {
 
-        for(int i = 0; i < spears.length(); ++i) {
+        // Example 3:
+        //
+        // Located in: JsonParsing/app/src/main/res/raw/json3.txt
+        //
+        // {
+        //     "weapons": {
+        //         "swords": [
+        //             {
+        //                 "name": "Short Sword",
+        //                 "damage": 25
+        //             },
+        //             {
+        //                 "name": "Broad Sword",
+        //                 "damage": 100
+        //             },
+        //             {
+        //                 "name": "Skull Cleaver",
+        //                 "damage": 150
+        //             }
+        //         ],
+        //         "spears": [
+        //             {
+        //                 "name": "Wooden Spear",
+        //                 "damage": 15
+        //             },
+        //             {
+        //                 "name": "Iron Spear",
+        //                 "damage": 20
+        //             }
+        //         ]
+        //     }
+        // }
 
-            JSONObject spear = spears.getJSONObject(i);
+        try {
 
-            int damage = spear.getInt("damage");
-            String name = spear.getString("name");
+            // Get our JSON data our of a file in the res/raw folder and into a String.
+            // In a real app, your JSON data would probably come from a web service or URL.
+            String jsonStr = readFileFromRes(R.raw.json3);
 
-            Log.i(TAG, "damage = " + String.valueOf(damage));
-            Log.i(TAG, "name = "+ name);
+            JSONObject rootJsonObject = new JSONObject(jsonStr);
+
+            JSONObject weapons = rootJsonObject.getJSONObject("weapons");
+
+            JSONArray swords = weapons.getJSONArray("swords");
+
+            for(int i = 0; i < swords.length(); ++i) {
+
+                JSONObject sword = swords.getJSONObject(i);
+
+                int damage = sword.getInt("damage");
+                String name = sword.getString("name");
+
+                Log.i(TAG, "name = " + name + ", damage = " + String.valueOf(damage));
+            }
+
+            JSONArray spears = weapons.getJSONArray("spears");
+
+            for(int i = 0; i < spears.length(); ++i) {
+
+                JSONObject spear = spears.getJSONObject(i);
+
+                int damage = spear.getInt("damage");
+                String name = spear.getString("name");
+
+                Log.i(TAG, "name = " + name + ", damage = " + String.valueOf(damage));
+            }
+
+        } catch(JSONException e) {
+
+            // Something went wrong while attempting to parse the JSON.
+            // In a real app, you would need to take action here and handle it!
+            e.printStackTrace();
         }
     }
 }
