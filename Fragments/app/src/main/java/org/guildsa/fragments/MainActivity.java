@@ -1,5 +1,6 @@
 package org.guildsa.fragments;
 
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity implements TextEditFragment.TextEditListener {
+
+    private int counter = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +52,31 @@ public class MainActivity extends AppCompatActivity implements TextEditFragment.
 //
 //                // Commit the transaction!
 //                transaction.commit();
+
+                //
+                // Create a new dynamic fragment if one can't be found, but if we can find one -
+                // just change its text.
+                //
+
+//                FragmentManager fragmentManager = getFragmentManager();
+//
+//                DynamicFragment dynamicFragment = (DynamicFragment)fragmentManager.findFragmentByTag("DYNAMIC");
+//
+//                if(dynamicFragment == null) {
+//
+//                    // We couldn't find it - so create a new one!
+//                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//
+//                    dynamicFragment = new DynamicFragment();
+//                    fragmentTransaction.add(R.id.fragmentContainer, dynamicFragment, "DYNAMIC");
+//                    fragmentTransaction.commit();
+//
+//                } else {
+//
+//                    // We did find it - so just change the existing one!
+//                    ++counter;
+//                    dynamicFragment.setText("Change to exisiting fragment: " + String.valueOf(counter));
+//                }
             }
         };
 
