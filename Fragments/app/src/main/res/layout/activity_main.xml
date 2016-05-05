@@ -29,4 +29,19 @@
         android:layout_below="@+id/textEditFragment"
         android:layout_marginTop="50dp"/>
 
+    <Button
+        android:id="@+id/loadBtn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Load Dynamic Fragment"
+        android:layout_below="@+id/textFragment"
+        android:layout_marginTop="20dp"/>
+
+    <LinearLayout
+        android:id="@+id/fragmentContainer"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@+id/loadBtn"/>
+
 </RelativeLayout>
