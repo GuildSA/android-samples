@@ -12,7 +12,7 @@
     tools:context="org.guildsa.backendlesstest.MainActivity">
 
     <Button
-        android:layout_width="150dp"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:text="Register User"
         android:id="@+id/registerUserBtn"
@@ -20,7 +20,7 @@
         android:layout_gravity="center_horizontal"/>
 
     <Button
-        android:layout_width="150dp"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:text="Login User"
         android:id="@+id/loginUserBtn"
@@ -28,7 +28,7 @@
         android:layout_gravity="center_horizontal"/>
 
     <Button
-        android:layout_width="150dp"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:text="Create Comment"
         android:id="@+id/createCommentBtn"
@@ -36,11 +36,19 @@
         android:layout_gravity="center_horizontal"/>
 
     <Button
-        android:layout_width="150dp"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:text="Fetch Comments"
         android:id="@+id/fetchCommentsBtn"
         android:onClick="onFetchCommentsBtn"
+        android:layout_gravity="center_horizontal"/>
+
+    <Button
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:text="Remove Comments"
+        android:id="@+id/removeCommentsBtn"
+        android:onClick="onRemoveCommentsBtn"
         android:layout_gravity="center_horizontal"/>
 
 </LinearLayout>

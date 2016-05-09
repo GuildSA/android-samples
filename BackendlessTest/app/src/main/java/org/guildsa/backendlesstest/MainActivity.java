@@ -146,4 +146,53 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void onRemoveCommentsBtn(View v) {
+
+        // Find all the Comments!
+        Backendless.Persistence.of(Comment.class).find(new AsyncCallback<BackendlessCollection<Comment>>(){
+
+            @Override
+            public void handleResponse( BackendlessCollection<Comment> foundComments ) {
+
+                Log.i(TAG, "Comments have been fetched:");
+
+                // Now, remove all the Comments we found - one by one!
+                for(Comment comment : foundComments.getData()) {
+
+                    Log.i(TAG, "Remove Comment: " + comment.getObjectId());
+
+                    // Becareful, you cannot make Synchronous database calls on the UI thread,
+                    // it has to be done on a separate thread or via the Asynchronous call.
+//                    Long result = Backendless.Persistence.of( Comment.class ).remove( comment );
+//
+//                    if(result > 0) {
+//                        Log.i(TAG, "One Comment has been removed: " + result);
+//                    } else {
+//                        Log.i(TAG, "Server reported an error on attempted removal: " + result);
+//                    }
+
+                    // Now, Asynchronously remove this Comment!
+                    Backendless.Persistence.of( Comment.class ).remove( comment, new AsyncCallback<Long>() {
+
+                        public void handleResponse(Long response) {
+                            // Comment has been deleted. The response is a time in milliseconds when the object was deleted
+                            Log.i(TAG, "One Comment has been removed: " + response);
+                        }
+
+                        public void handleFault(BackendlessFault fault) {
+                            // An error has occurred, the error code can be retrieved with fault.getCode()
+                            Log.i(TAG, "Server reported an error on attempted removal: " + fault);
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void handleFault( BackendlessFault fault ) {
+
+                Log.i(TAG, "Comments were not fetched: " + fault.toString());
+            }
+        });
+    }
 }
