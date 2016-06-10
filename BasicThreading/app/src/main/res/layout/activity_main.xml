@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              tools:context="org.guildsa.basicthreading.MainActivity"
+              android:gravity="center_horizontal">
+
+    <ProgressBar
+        android:id="@+id/progressBar1"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="false"
+        android:max="10"
+        android:padding="4dip" >
+    </ProgressBar>
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="" >
+    </TextView>
+
+    <Button
+        android:id="@+id/startProgressBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="startProgress"
+        android:text="Start Progress - No Thread"
+        >
+    </Button>
+
+    <Button
+        android:id="@+id/startProgressRunnableBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="startProgressRunnable"
+        android:text="Start Progress - Runnable"
+        >
+    </Button>
+
+    <Button
+        android:id="@+id/startProgressAsyncTaskBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="startProgressAsyncTask"
+        android:text="Start Progress - AsyncTask"
+        >
+    </Button>
+
+    <Button
+        android:id="@+id/stopProgressBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="stopProgress"
+        android:text="Stop Progress"
+        >
+    </Button>
+
+</LinearLayout>
