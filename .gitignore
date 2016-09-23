@@ -38,3 +38,4 @@ captures/
 .gradle
 build/
 
+.DS_Store
