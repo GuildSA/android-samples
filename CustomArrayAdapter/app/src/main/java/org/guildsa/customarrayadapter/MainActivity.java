@@ -18,16 +18,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        listView = (ListView) findViewById( R.id.listView );
+        listView = (ListView) findViewById(R.id.listView);
 
         // Get our test phone numbers which are stored in the res/values/strings.xml file.
-        String[] phoneNumbers = getResources().getStringArray( R.array.phone_numbers );
+        String[] phoneNumbers = getResources().getStringArray(R.array.phone_numbers);
 
         // Create an instance of our custom array adaptor to fill our ListView.
-        MyCustomArrayAdapter customArrayAdaptor = new MyCustomArrayAdapter( this, phoneNumbers );
+        MyCustomArrayAdapter customArrayAdaptor = new MyCustomArrayAdapter(this, phoneNumbers);
 
         // Set our custom array adaptor as the ListView's adapter.
-        listView.setAdapter( customArrayAdaptor );
+        listView.setAdapter(customArrayAdaptor);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 

@@ -75,8 +75,8 @@ public class MainActivity extends AppCompatActivity {
                     Log.d( TAG, "screenName = " + screenName );
                     Log.d( TAG, "highScore = " + String.valueOf( highScore ) );
 
-                    screenNameText.append( screenName );
-                    highScoreText.append( String.valueOf( highScore ) );
+                    screenNameText.setText("Screen Name: " + screenName);
+                    highScoreText.setText( "High Score: " + String.valueOf( highScore ) );
 
                 break;
             }
