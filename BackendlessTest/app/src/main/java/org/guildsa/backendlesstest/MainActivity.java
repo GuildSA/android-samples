@@ -1,5 +1,6 @@
 package org.guildsa.backendlesstest;
 
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,8 +23,8 @@ public class MainActivity extends AppCompatActivity {
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     // Replace these with YOUR App's ID and Secret Key from YOUR Backendless Dashboard!
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    private final static String APP_ID = "761FB252-4CE5-99EF-FF77-C9E99ACAA400";
-    private final static String SECRET_KEY = "26833F24-B8CE-471F-FFFB-BBA7054AD900";
+    private final static String APP_ID = "<replace-with-your-app-id>";
+    private final static String SECRET_KEY = "<replace-with-your-secret-key>";
 
     private final static String USER_NAME = "android_user@gmail.com";
     private final static String PASSWORD = "password";
@@ -34,7 +35,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Backendless.initApp(this, APP_ID, SECRET_KEY, APP_VERSION);
+        if(APP_ID != "<replace-with-your-app-id>" && SECRET_KEY != "<replace-with-your-secret-key>") {
+
+            Backendless.initApp(this, APP_ID, SECRET_KEY, APP_VERSION);
+
+        } else {
+
+            AlertDialog.Builder alert = new AlertDialog.Builder( this );
+            alert.setTitle( "Backendless Error" )
+                    .setMessage( "To use this sample you must register with Backendless, create an app, and replace the APP_ID and SECRET_KEY in the MainActivity with the values from your app's settings." )
+                    .setNeutralButton( "OK", null )
+                    .show();
+        }
     }
 
     public void onRegisterUserBtn(View v) {
