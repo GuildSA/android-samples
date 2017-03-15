@@ -19,23 +19,23 @@ public class MainActivity extends AppCompatActivity {
     //http://jsonplaceholder.typicode.com/
     public static final String URL = "http://jsonplaceholder.typicode.com/users";
 
-    Button button;
-    TextView outputText;
+    Button mButton;
+    TextView mTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        outputText = (TextView) findViewById(R.id.outputTxt);
+        mTextView = (TextView) findViewById(R.id.outputTxt);
 
-        button = (Button) findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
+        mButton = (Button) findViewById(R.id.button);
+        mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 // Clear out any old data!
-                outputText.setText("");
+                mTextView.setText("");
 
                 // Instantiate the RequestQueue.
                 RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
@@ -43,17 +43,15 @@ public class MainActivity extends AppCompatActivity {
                 // Request a string response from the provided URL.
                 StringRequest stringRequest = new StringRequest(Request.Method.GET, URL,
                         new Response.Listener<String>() {
-
                             @Override
                             public void onResponse(String response) {
                                 // Display the response string.
-                                outputText.setText("Response is: " + response);
+                                mTextView.setText("Response is: " + response);
                             }
                         }, new Response.ErrorListener() {
-
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        outputText.setText("That didn't work!");
+                        mTextView.setText("That didn't work!");
                     }
                 });
 
