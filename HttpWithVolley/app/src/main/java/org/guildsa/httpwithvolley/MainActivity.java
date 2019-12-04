@@ -1,6 +1,5 @@
 package org.guildsa.httpwithvolley;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +11,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,9 +28,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mTextView = (TextView) findViewById(R.id.outputTxt);
+        mTextView = findViewById(R.id.outputTxt);
 
-        mButton = (Button) findViewById(R.id.button);
+        mButton = findViewById(R.id.button);
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -42,13 +43,16 @@ public class MainActivity extends AppCompatActivity {
 
                 // Request a string response from the provided URL.
                 StringRequest stringRequest = new StringRequest(Request.Method.GET, URL,
+
                         new Response.Listener<String>() {
+
                             @Override
                             public void onResponse(String response) {
                                 // Display the response string.
                                 mTextView.setText("Response is: " + response);
                             }
                         }, new Response.ErrorListener() {
+
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         mTextView.setText("That didn't work!");
