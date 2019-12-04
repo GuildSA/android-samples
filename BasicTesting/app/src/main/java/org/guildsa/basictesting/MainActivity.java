@@ -1,7 +1,8 @@
 package org.guildsa.basictesting;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 /**
  * The preferred way of organizing Android tests can be seen by simply creating a new Android app
