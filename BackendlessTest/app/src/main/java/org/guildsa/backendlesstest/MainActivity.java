@@ -1,30 +1,30 @@
 package org.guildsa.backendlesstest;
 
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
 import com.backendless.Backendless;
-import com.backendless.BackendlessCollection;
 import com.backendless.BackendlessUser;
 import com.backendless.async.callback.AsyncCallback;
 import com.backendless.async.callback.BackendlessCallback;
 import com.backendless.exceptions.BackendlessFault;
 import com.backendless.persistence.local.UserTokenStorageFactory;
 
+import java.util.List;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 public class MainActivity extends AppCompatActivity {
 
     private final static String TAG = MainActivity.class.getSimpleName();
-
-    private final static String APP_VERSION = "v1";
 
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     // Replace these with YOUR App's ID and Secret Key from YOUR Backendless Dashboard!
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     private final static String APP_ID = "<replace-with-your-app-id>";
-    private final static String SECRET_KEY = "<replace-with-your-secret-key>";
+    private final static String API_KEY = "<replace-with-your-api-key>";
 
     private final static String USER_NAME = "android_user@gmail.com";
     private final static String PASSWORD = "password";
@@ -35,9 +35,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if(APP_ID != "<replace-with-your-app-id>" && SECRET_KEY != "<replace-with-your-secret-key>") {
+        if(APP_ID != "<replace-with-your-app-id>" && API_KEY != "<replace-with-your-api-key>") {
 
-            Backendless.initApp(this, APP_ID, SECRET_KEY, APP_VERSION);
+            Backendless.initApp(this, APP_ID, API_KEY);
 
         } else {
 
@@ -139,20 +139,20 @@ public class MainActivity extends AppCompatActivity {
 
     public void onFetchCommentsBtn(View v) {
 
-        Backendless.Persistence.of(Comment.class).find(new AsyncCallback<BackendlessCollection<Comment>>(){
+        Backendless.Data.of(Comment.class).find(new AsyncCallback<List<Comment>>(){
 
             @Override
-            public void handleResponse( BackendlessCollection<Comment> foundComments ) {
+            public void handleResponse(List<Comment> foundComments) {
 
                 Log.i(TAG, "Comments have been fetched:");
 
-                for(Comment comment : foundComments.getData()) {
+                for(Comment comment : foundComments) {
                     Log.i(TAG, "Comment: " + comment.getObjectId() + ", message: " + comment.getMessage());
                 }
             }
 
             @Override
-            public void handleFault( BackendlessFault fault ) {
+            public void handleFault(BackendlessFault fault) {
 
                 Log.i(TAG, "Comments were not fetched: " + fault.toString());
             }
@@ -161,31 +161,21 @@ public class MainActivity extends AppCompatActivity {
 
     public void onRemoveCommentsBtn(View v) {
 
-        // Find all the Comments!
-        Backendless.Persistence.of(Comment.class).find(new AsyncCallback<BackendlessCollection<Comment>>(){
+        Backendless.Data.of(Comment.class).find(new AsyncCallback<List<Comment>>() {
 
             @Override
-            public void handleResponse( BackendlessCollection<Comment> foundComments ) {
+            public void handleResponse(List<Comment> foundComments) {
 
                 Log.i(TAG, "Comments have been fetched:");
 
-                // Now, remove all the Comments we found - one by one!
-                for(Comment comment : foundComments.getData()) {
+                for(Comment comment : foundComments) {
+
+                    Log.i(TAG, "Comment: " + comment.getObjectId() + ", message: " + comment.getMessage());
 
                     Log.i(TAG, "Remove Comment: " + comment.getObjectId());
 
-                    // Becareful, you cannot make Synchronous database calls on the UI thread,
-                    // it has to be done on a separate thread or via the Asynchronous call.
-//                    Long result = Backendless.Persistence.of( Comment.class ).remove( comment );
-//
-//                    if(result > 0) {
-//                        Log.i(TAG, "One Comment has been removed: " + result);
-//                    } else {
-//                        Log.i(TAG, "Server reported an error on attempted removal: " + result);
-//                    }
-
                     // Now, Asynchronously remove this Comment!
-                    Backendless.Persistence.of( Comment.class ).remove( comment, new AsyncCallback<Long>() {
+                    Backendless.Persistence.of(Comment.class).remove( comment, new AsyncCallback<Long>() {
 
                         public void handleResponse(Long response) {
                             // Comment has been deleted. The response is a time in milliseconds when the object was deleted
@@ -201,7 +191,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void handleFault( BackendlessFault fault ) {
+            public void handleFault(BackendlessFault fault) {
 
                 Log.i(TAG, "Comments were not fetched: " + fault.toString());
             }
