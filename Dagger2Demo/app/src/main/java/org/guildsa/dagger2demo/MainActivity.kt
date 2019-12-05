@@ -1,11 +1,9 @@
-package org.guildsa.dagger2demo;
+package org.guildsa.dagger2demo
 
-import android.os.Bundle;
-import android.util.Log;
-
-import javax.inject.Inject;
-
-import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle
+import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
+import javax.inject.Inject
 
 //
 // Note: To use Dagger correctly, we need to add annotations to our existing classes
@@ -25,34 +23,35 @@ import androidx.appcompat.app.AppCompatActivity;
 //    Use @Module to create a class that contains your method that uses @Provides
 //    to return it.
 
-public class MainActivity extends AppCompatActivity {
-
-    private final static String TAG = MainActivity.class.getSimpleName();
+class MainActivity : AppCompatActivity() {
 
     // Our MainActivity class wants the UserPrefs and CloudDatabase objects injected into it!
-    @Inject UserPrefs mUserPrefs;
-    @Inject CloudDatabase mCloudDatabase;
+    @JvmField
+    @Inject
+    var mUserPrefs: UserPrefs? = null
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    @JvmField
+    @Inject
+    var mCloudDatabase: CloudDatabase? = null
 
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    override fun onCreate(savedInstanceState: Bundle?) {
 
-        MyApplication myApp = ((MyApplication) getApplication());
+        super.onCreate(savedInstanceState)
+
+        setContentView(R.layout.activity_main)
+
+        val myApp = application as MyApplication
 
         //
         // Our first example is fairly simple; we'll inject the UserPrefs object held by
         // MyApplication, into our class MainActivity.
         //
 
-        myApp.getUserPrefsComponent().inject(this);
-
-        boolean injected = mUserPrefs == null ? false : true;
-        Log.d(TAG, "mUserPrefs injected = " + String.valueOf(injected));
-
-        String zipCode = mUserPrefs.getZipCode();
-        Log.d(TAG, "zipCode = " + zipCode);
+        myApp.getUserPrefsComponent()?.inject(this)
+        var injected = if(mUserPrefs == null) false else true
+        Log.d(TAG, "mUserPrefs injected = $injected")
+        val zipCode = mUserPrefs?.getZipCode()
+        Log.d(TAG, "zipCode = $zipCode")
 
         //
         // The second example is a bit more complicated; we'll use Dagger to inject the
@@ -60,12 +59,14 @@ public class MainActivity extends AppCompatActivity {
         // CloudDatabase itself has an internal dependency on HttpClient.
         //
 
-        myApp.getCloudDatabaseComponent().inject(this);
+        myApp.getCloudDatabaseComponent()?.inject(this)
+        injected = if(mCloudDatabase == null) false else true
+        Log.d(TAG, "mCloudDatabase injected = $injected")
+        val userData = mCloudDatabase?.getUserData("42")
+        Log.d(TAG, "userData = $userData")
+    }
 
-        injected = mCloudDatabase == null ? false : true;
-        Log.d(TAG, "mCloudDatabase injected = " + String.valueOf(injected));
-
-        String userData = mCloudDatabase.getUserData("42");
-        Log.d(TAG, "userData = " + userData);
+    companion object {
+        private val TAG = MainActivity::class.java.simpleName
     }
 }
