@@ -1,10 +1,11 @@
 package org.guildsa.dagger2demo;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
 import javax.inject.Inject;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 //
 // Note: To use Dagger correctly, we need to add annotations to our existing classes
