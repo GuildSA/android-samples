@@ -11,7 +11,7 @@
     tools:context="org.guildsa.httpwithasynctask.MainActivity">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/get_data_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -21,10 +21,10 @@
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@+id/button"
+                android:layout_below="@+id/get_data_btn"
                 android:layout_marginTop="16dp">
         <TextView
-            android:id="@+id/outputTxt"
+            android:id="@+id/output_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
