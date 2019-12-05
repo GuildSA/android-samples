@@ -17,7 +17,7 @@
         android:text="User Name: " />
 
     <EditText
-        android:id="@+id/user_name"
+        android:id="@+id/user_name_et"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp" />
@@ -28,27 +28,27 @@
         android:text="Password: " />
 
     <EditText
-        android:id="@+id/password"
+        android:id="@+id/password_et"
         android:inputType="textPassword"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp" />
 
     <Button
-        android:id="@+id/next_screen"
+        android:id="@+id/next_screen_btn"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:text="Login" />
 
     <TextView
-        android:id="@+id/screen_name"
+        android:id="@+id/screen_name_tv"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Screen Name: " />
 
     <TextView
-        android:id="@+id/high_score"
+        android:id="@+id/high_score_tv"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="High Score: " />
