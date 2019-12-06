@@ -1,24 +1,19 @@
 package org.guildsa.listview
 
 import android.os.Bundle
-import android.view.View
 import android.widget.ArrayAdapter
-import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
+import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
-    private var listView: ListView? = null
     private var listAdapter: ArrayAdapter<String?>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        // Find the ListView in our layout.
-        listView = findViewById<View?>(R.id.listView) as ListView?
 
         // Create and populate a List of test data.
         val myData = arrayOf<String?>(
@@ -54,6 +49,6 @@ class MainActivity : AppCompatActivity() {
 
         // Set our listAdapter as the ListView's adapter. This is how it knows where to get the
         // data for the ListView's rows.
-        listView?.adapter = listAdapter
+        listView.adapter = listAdapter
     }
 }
