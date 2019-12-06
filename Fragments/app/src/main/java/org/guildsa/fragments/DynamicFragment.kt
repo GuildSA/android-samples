@@ -5,21 +5,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import kotlinx.android.synthetic.main.dynamic_fragment.*
 
 class DynamicFragment : Fragment() {
-    private var textView: TextView? = null
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? { // Inflating the layout for this fragment
-        val view = inflater.inflate(R.layout.dynamic_fragment, null)
-        textView = view.findViewById<View?>(R.id.textView1) as TextView?
-        return view
+
+    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
+        // Inflating the layout for this fragment.
+        return inflater?.inflate(R.layout.dynamic_fragment, null)
     }
 
     fun setText(text: String?) {
-        textView.setText(text)
+        textView1.setText(text)
     }
 
     fun getText(): String? {
-        return textView.toString()
+        return textView1.toString()
     }
 }
